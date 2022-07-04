@@ -1,6 +1,7 @@
 export const MbtiQuestions = [
   {
     q: "아 오늘 롤이 하고싶다! 당신은?",
+    background: "1",
     options: [
       {
         ans: "롤은 무조건 솔랭이지!",
@@ -14,6 +15,7 @@ export const MbtiQuestions = [
   },
   {
     q: "미드에 적이 사라져 백핑을 찍어줬고 탑은 뺴면 사는상황 하지만 오히려 같이 안왔다고 뭐라하는 우리탑! 이떄 당신은?",
+    background: "2",
     options: [
       {
         ans: "누가봐도 탑이 잘못한건 알지만 일단 미안하다하고 다음에 가준다고 한다.",
@@ -27,6 +29,7 @@ export const MbtiQuestions = [
   },
   {
     q: "한타 대승하고 그대로 밀면 게임을 끝날지 안끝날지 모르겠다, 이떄 우리팀이 바론을 가자고 핑을찍는다. 이때 당신은?",
+    background: "3",
     options: [
       {
         ans: "게임을 끝낼수 있을진 모르겠지만 확률이 있다고 판단하니 끝내러가자고 핑을찍는다.",
@@ -40,6 +43,7 @@ export const MbtiQuestions = [
   },
   {
     q: "게임 픽창에서 전판 싸운팀원들이 다시 만나 채팅으로 싸운다, 이떄 당신은?",
+    background: "4",
     options: [
       {
         ans: "싸우는 팀원들의 전적을 검색해보고, 진짜 같은 팀이었다면 바로 닷지한다.",
@@ -53,6 +57,7 @@ export const MbtiQuestions = [
   },
   {
     q: "당신은 정글러입니다. 상성상 탑쪽 동선을 짜는게 맞지만 봇에서 힘들다고 도움을 요청합니다, 이떄 당신은?",
+    background: "5",
     options: [
       {
         ans: "이미 동선을 짜놨기 떄문에 무시하고 탑쪽 동선을 잡고 탑을 봐준다.",
@@ -66,6 +71,7 @@ export const MbtiQuestions = [
   },
   {
     q: "당신은 서포터입니다. 현재 당신의 원딜은 루시안인데 어떤 서포터를 할것같나요?",
+    background: "6",
     options: [
       {
         ans: "당연히 루시안과 궁합이 잘맞는 서포터는 나미지! 나미를 픽한다.",
@@ -79,6 +85,7 @@ export const MbtiQuestions = [
   },
   {
     q: "오늘 랭크게임에서 5연패를 했다. 이때 화를 푸는 방법은?",
+    background: "7",
     options: [
       {
         ans: "다른 친구들과 듀오를하거나, 저녁에 친구를 만나서 얘기를 하며 화를푼다.",
@@ -92,6 +99,7 @@ export const MbtiQuestions = [
   },
   {
     q: "당신은 원딜러입니다. 레드를 먹으러가는데 채팅창으로 팀원과 싸우던 탑이 이미 레드를 먹고 있습니다. 이떄 당신은?",
+    background: "8",
     options: [
       {
         ans: "이미 망한 탑이고, 내가 레드를 먹으면 게임이길 확률이 높으니 무시하고 내가먹는다.",

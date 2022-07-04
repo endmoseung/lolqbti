@@ -6,7 +6,7 @@ const QuizSelect = (props) => {
   return (
     <Link to={"/quiz/result"}>
       <Quiz>
-        <div>mbti 고르세용</div>
+        <div>Quiz 고르세용</div>
       </Quiz>
     </Link>
   );

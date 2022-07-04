@@ -64,6 +64,7 @@ const HeaderTitle = styled.div`
 `;
 const HeaderText = styled.div`
   font-size: 20px;
+  line-height: 30px;
 `;
 const Main = styled.div`
   display: flex;
