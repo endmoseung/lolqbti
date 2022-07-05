@@ -32,6 +32,6 @@ const ButtonWrapper = styled.div`
     border: none;
   }
   button:hover {
-    background-color: white;
+    background-color: ${({ theme }) => theme.colors.WHITE};
   }
 `;

@@ -1,9 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Answers from "../components/answers";
 import Question from "../components/question";
 import { MbtiQuestions } from "../Constant/MbtiQuestions";
+
+let answer = "";
 
 const MbtiSelect = (props) => {
   const [presentQuestion, setQuestion] = useState(0);
@@ -11,57 +13,64 @@ const MbtiSelect = (props) => {
   const [changeColor, setChange] = useState(
     `${({ theme }) => theme.colors.MAIN_BG}`
   );
-
-  const handleColor = () => {};
+  useEffect(() => {
+    answer = "";
+  }, []);
+  //다음 페이지로 이동버튼 색깔 관리 state
+  const [nextPage, setNextPage] = useState("gray");
+  //다음 페이지로 이동버튼 클릭 상태 관리 state
+  const [canClick, setCanClick] = useState("none");
+  //MBTI 점수 계산 관리 state
+  const [MBTI, setMBTI] = useState("");
 
   const link = useRef();
-  const nextPage = useRef();
-  const mbtiScore = {
-    E: 0,
-    I: 0,
-    S: 0,
-    N: 0,
-    T: 0,
-    F: 0,
-    J: 0,
-    P: 0,
-  };
+
+  const handleNextPage = () => {};
 
   const handleClick = (event) => {
     setChange("blue");
-    if (presentQuestion < 7) {
+    for (let i = 0; i < 2; i++) {
+      if (
+        MbtiQuestions[presentQuestion].options[i].ans === event.target.innerText
+      ) {
+        answer += MbtiQuestions[presentQuestion].options[i].type.value;
+      }
+    }
+    if (presentQuestion < MbtiQuestions.length - 1) {
       setQuestion(presentQuestion + 1);
     }
-    link.current.style.pointerEvents = "auto";
-    nextPage.current.style.backgroundColor = "white";
-    // for(let i=0;i<2;i++){
-    //   if(MbtiQuestions[presentQuestion].options[i].ans===event.target.innerText){
-    //     mbtiScore.{MbtiQuestions[presentQuestion].options[i].type.value}++
-    //   }
-    // }
+    if (presentQuestion === MbtiQuestions.length - 1) {
+      setNextPage("white");
+      setCanClick("auto");
+    }
+    setMBTI(answer);
   };
   return (
     <SelectWrapper>
-      <h1 className="title">LOL MBTI</h1>
       <ProgressBar></ProgressBar>
-      <Question mbtiQuestions={MbtiQuestions[presentQuestion]}></Question>
+      <Question Questions={MbtiQuestions[presentQuestion]}></Question>
       <Answers
         currentColor={changeColor}
-        answerColor={handleColor}
         onLink={link}
         onClick={handleClick}
-        mbtiQuestions={MbtiQuestions[presentQuestion].options[0].ans}
+        Questions={MbtiQuestions[presentQuestion].options[0].ans}
       ></Answers>
       <Answers
         currentColor={changeColor}
-        answerColor={handleColor}
         onLink={link}
         onClick={handleClick}
-        mbtiQuestions={MbtiQuestions[presentQuestion].options[1].ans}
+        Questions={MbtiQuestions[presentQuestion].options[1].ans}
       ></Answers>
       {presentQuestion === MbtiQuestions.length - 1 ? (
-        <Link ref={link} className="link" to={"/mbti/result"}>
-          <div ref={nextPage} className="nextPage">
+        <Link
+          style={{ pointerEvents: canClick }}
+          ref={link}
+          className="link"
+          to="/mbti/result"
+          state={{ mbti: MBTI }}
+          onClick={handleNextPage}
+        >
+          <div style={{ backgroundColor: nextPage }} className="nextPage">
             결과보기
           </div>
         </Link>
@@ -80,15 +89,15 @@ const SelectWrapper = styled.div`
   }
   width: 500px;
   background-color: black;
-  color: white;
+  color: ${({ theme }) => theme.colors.WHITE};
   height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 30px;
+
   .link {
     width: 100%;
-    margin-top: 30px;
+    margin-top: 20px;
     pointer-events: none;
   }
   .nextPage {
@@ -96,8 +105,9 @@ const SelectWrapper = styled.div`
     width: 80%;
     box-sizing: content-box;
     padding: 10px;
+    font-size: 20px;
+    font-weight: bold;
     color: black;
-    background-color: gray;
     margin: auto;
     transition: 300ms all ease-out;
   }

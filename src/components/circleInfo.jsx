@@ -6,7 +6,7 @@ const CircleInfo = (props) => {
     <InfoWrapper>
       <div className="info">
         adad
-        <img src="" alt="" />
+        <img src={props.imageURL} alt="" />
       </div>
       <div className="border"></div>
     </InfoWrapper>
@@ -14,7 +14,6 @@ const CircleInfo = (props) => {
 };
 
 export default CircleInfo;
-
 const rotate = keyframes`
   
     from{
@@ -36,11 +35,21 @@ const InfoWrapper = styled.div`
   align-items: center;
   position: relative;
   .info {
+    position: relative;
     width: 90%;
     height: 90%;
     border-radius: 50%;
     border: 3px solid rgb(193, 143, 41);
     background-color: white;
+  }
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
   }
   .border {
     width: 220px;

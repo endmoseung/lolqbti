@@ -28,5 +28,8 @@ const ButtonWrapper = styled.div`
     width: 100%;
     cursor: pointer;
     margin: auto;
+    color: ${({ theme }) => theme.colors.WHITE};
+    font-size: 18px;
+    font-weight: bold;
   }
 `;

@@ -6,13 +6,13 @@ const Answers = (props) => {
   const handleClick = (e) => {
     // answerDiv.current.style.backgroundColor = "blue";
     props.onClick(e);
-    props.answerColor();
+    // props.answerColor();
   };
 
   return (
     <AnswerWrapper>
       <div ref={answerDiv} className="div" onClick={handleClick}>
-        {props.mbtiQuestions}
+        {props.Questions}
       </div>
     </AnswerWrapper>
   );
@@ -23,17 +23,18 @@ export default Answers;
 const AnswerWrapper = styled.div`
   width: 100%;
   div {
+    background-color: ${({ theme }) => theme.colors.MAIN_BG};
     cursor: pointer;
-    color: white;
+    color: ${({ theme }) => theme.colors.WHITE};
     width: 80%;
     text-align: center;
-    font-size: 20px;
+    font-size: 16px;
     margin: auto;
     margin-top: 20px;
     box-sizing: content-box;
     padding: 20px;
   }
   .div:hover {
-    background-color: blue;
+    background-color: #5555e9;
   }
 `;

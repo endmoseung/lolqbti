@@ -17,7 +17,7 @@ const MainPage = (props) => {
       <Main>
         <Mbti>
           <MbtiTitle>LOL MBTI</MbtiTitle>
-          <CircleInfo></CircleInfo>
+          <CircleInfo imageURL={"/images/mainpage/left.png"}></CircleInfo>
           <MbtiText>
             당신의 게임성향을 통해 MBTI와 그에 맞는 챔피언을 확인해보세요
           </MbtiText>
@@ -27,7 +27,7 @@ const MainPage = (props) => {
         </Mbti>
         <Quiz>
           <QuizTitle>LOL Quiz</QuizTitle>
-          <CircleInfo></CircleInfo>
+          <CircleInfo imageURL={"/images/mainpage/right.png"}></CircleInfo>
           <QuizText>
             게임속 구체화된 상황으로 당신의 뇌지컬을 Tier로 확인해보세요
           </QuizText>
@@ -46,7 +46,7 @@ const PageWrapper = styled.div`
   width: 500px;
   background-color: black;
   height: 100%;
-  color: white;
+  color: ${({ theme }) => theme.colors.WHITE};
 `;
 
 const Header = styled.div`
