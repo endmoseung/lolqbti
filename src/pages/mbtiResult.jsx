@@ -1,12 +1,26 @@
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
+import Facebook from "../components/facebook";
 import HomeButton from "../components/homeButton";
+import Kakaotalk from "../components/kakaotalk";
 import { MbtiResults } from "../Constant/mbtiResult";
+import Capture from "../components/capture";
+import html2canvas from "html2canvas";
 
 const MbtiResult = (props) => {
-  const location = useLocation();
-  const mbti = location.state.mbti;
-  const sortMbti = mbti.split("").sort().join(""); //mbti 성향을 받아서 성향별로 sort
+  const { state } = useLocation();
+  const sortMbti = state.split("").sort().join(""); //mbti 성향을 받아서 성향별로 sort
+
+  const capture = () => {
+    html2canvas(document.body).then((canvas) => {
+      const link = document.createElement("a");
+      link.download = "LOLMBTI";
+      link.href = canvas.toDataURL();
+      document.body.appendChild(link);
+      link.click();
+    });
+  };
+
   const solution = (sortMbti) => {
     //sortMbti를 문자갯수로 재정의 한다음 2개이상인값만 뽑아서 Mbti를 추출하는 함수
     let answer = "";
@@ -48,15 +62,18 @@ const MbtiResult = (props) => {
     "/images/mbtichampion/" + MbtiResults[soluted].mbti + ".jpeg";
   return (
     <ResultWrapper>
-      <div className="summoner">소환사님의 mbti는?</div>
+      <Summoner>소환사님의 mbti는?</Summoner>
       <MbtiText>{MbtiResults[soluted].mbti}</MbtiText>
       <MbtiChampion>
         <img src={imageUrl} alt="" />
-        <div className="championName">{MbtiResults[soluted].championName}</div>
+        <ChampionName>{MbtiResults[soluted].championName}</ChampionName>
       </MbtiChampion>
       <MbtiTitle>{MbtiResults[soluted].title}</MbtiTitle>
       <MbtiMain>{MbtiResults[soluted].main} </MbtiMain>
       <HomeButton></HomeButton>
+      <Kakaotalk></Kakaotalk>
+      <Facebook></Facebook>
+      <Capture fileName={"LOLMBTI"} onClick={capture}></Capture>
     </ResultWrapper>
   );
 };
@@ -67,18 +84,18 @@ const ResultWrapper = styled.div`
   background-color: black;
   text-align: center;
   padding: 20px;
-  .summoner {
-    font-size: 25px;
-    margin-bottom: 10px;
-  }
   div {
     color: white;
   }
   img {
     width: 240px;
     height: 250px;
-    background: linear-gradient(-45deg, transparent 15px, palevioletred 0);
   }
+`;
+
+const Summoner = styled.div`
+  font-size: 25px;
+  margin-bottom: 10px;
 `;
 
 const MbtiText = styled.div`
@@ -93,15 +110,14 @@ const MbtiChampion = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 20px 0;
-
-  .championName {
-    background-color: ${({ theme }) => theme.colors.MAIN_BG};
-    width: 200px;
-    text-align: start;
-    box-sizing: content-box;
-    padding: 15px 20px;
-    line-height: 20px;
-  }
+`;
+const ChampionName = styled.div`
+  background-color: ${({ theme }) => theme.colors.MAIN_BG};
+  width: 200px;
+  text-align: start;
+  box-sizing: content-box;
+  padding: 15px 20px;
+  line-height: 20px;
 `;
 
 const MbtiTitle = styled.div`

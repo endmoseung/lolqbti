@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-const QuizQuestion = (props) => {
+const QuizQuestion = ({ Questions }) => {
   return (
     <Wrapper>
-      <MainQuestion>{props.Questions}</MainQuestion>
+      <MainQuestion>{Questions}</MainQuestion>
     </Wrapper>
   );
 };

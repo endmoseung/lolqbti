@@ -1,17 +1,61 @@
 import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Loading = (props) => {
+  const location = useLocation();
+  const loadingText = location.state.loadingText;
+  const preventValue = location.state.preventPage;
+  const navigator = useNavigate();
+
+  setTimeout(() => {
+    navigator(isNaN(preventValue) === true ? "/mbti/result" : "/quiz/result", {
+      state: preventValue,
+    });
+  }, 3000);
+
   return (
     <LoadingWrapper>
-      <div>귀여운 유미가 결과를 분석중입니다.</div>
-      <img
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG18s4wUVegrq_cZvYdtiJtA23APH_tI8piA&usqp=CAU"
-        alt=""
-      />
+      <LoadingText>
+        귀여운 유미가<br></br> {loadingText}
+      </LoadingText>
+      <ImageWrapper>
+        <ImageBorder></ImageBorder>
+        <Image src="/images/loading/yummi.gif" alt=""></Image>
+      </ImageWrapper>
     </LoadingWrapper>
   );
 };
 
 export default Loading;
-const LoadingWrapper = styled.div``;
+const LoadingWrapper = styled.div`
+  width: 500px;
+  background-color: black;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+const LoadingText = styled.div`
+  color: ${({ theme }) => theme.colors.WHITE};
+  font-family: "CookieRun-Regular";
+  margin-bottom: 30px;
+`;
+const ImageWrapper = styled.div`
+  position: relative;
+`;
+
+const Image = styled.img`
+  width: 400px;
+  height: 300px;
+`;
+
+const ImageBorder = styled.div`
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  width: 380px;
+  height: 320px;
+  border: solid white 2px;
+`;

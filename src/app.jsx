@@ -21,5 +21,5 @@ export default App;
 const Wrapper = styled.h1`
   display: flex;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
 `;

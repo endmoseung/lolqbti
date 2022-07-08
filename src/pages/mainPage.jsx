@@ -22,7 +22,7 @@ const MainPage = (props) => {
             당신의 게임성향을 통해 MBTI와 그에 맞는 챔피언을 확인해보세요
           </MbtiText>
           <Link to="/mbti/select">
-            <Button buttonName={"무료로 MBTI 검사하기"}></Button>
+            <Button buttonText={"무료로 MBTI 검사하기"}></Button>
           </Link>
         </Mbti>
         <Quiz>
@@ -32,7 +32,7 @@ const MainPage = (props) => {
             게임속 구체화된 상황으로 당신의 뇌지컬을 Tier로 확인해보세요
           </QuizText>
           <Link to="/quiz/select">
-            <Button buttonName={"무료로 Quiz 풀기"}></Button>
+            <Button buttonText={"무료로 Quiz 풀기"}></Button>
           </Link>
         </Quiz>
       </Main>
@@ -43,9 +43,9 @@ const MainPage = (props) => {
 export default MainPage;
 
 const PageWrapper = styled.div`
-  width: 500px;
+  max-width: 500px;
   background-color: black;
-  height: 100%;
+  min-height: 100vh;
   color: ${({ theme }) => theme.colors.WHITE};
 `;
 

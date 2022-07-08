@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Answers from "../components/answers";
@@ -6,30 +6,27 @@ import Question from "../components/question";
 import { MbtiQuestions } from "../Constant/MbtiQuestions";
 
 let answer = "";
-
 const MbtiSelect = (props) => {
   const [presentQuestion, setQuestion] = useState(0);
 
-  const [changeColor, setChange] = useState(
+  const [currentColor, setCurrentColor] = useState(
     `${({ theme }) => theme.colors.MAIN_BG}`
   );
   useEffect(() => {
     answer = "";
-  }, []);
+  }, []); // 첫페이지로 이동했을때 다시 테스트보면 answer가 중첩되므로 mount됬을때 answer를 초기화해준다.
   //다음 페이지로 이동버튼 색깔 관리 state
   const [nextPage, setNextPage] = useState("gray");
   //다음 페이지로 이동버튼 클릭 상태 관리 state
   const [canClick, setCanClick] = useState("none");
   //MBTI 점수 계산 관리 state
   const [MBTI, setMBTI] = useState("");
+  //마지막페이지에서 문항 클릭시 버튼 비활성화 관리 state
+  const [pointerEvents, setPointerEvents] = useState("auto");
 
-  const link = useRef();
-
-  const handleNextPage = () => {};
-
-  const handleClick = (event) => {
-    setChange("blue");
-    for (let i = 0; i < 2; i++) {
+  const onClickAnswer = (event) => {
+    setCurrentColor("blue");
+    for (let i = 0; i < MbtiQuestions[0].options.length; i++) {
       if (
         MbtiQuestions[presentQuestion].options[i].ans === event.target.innerText
       ) {
@@ -42,33 +39,31 @@ const MbtiSelect = (props) => {
     if (presentQuestion === MbtiQuestions.length - 1) {
       setNextPage("white");
       setCanClick("auto");
+      setPointerEvents("none");
     }
     setMBTI(answer);
   };
   return (
     <SelectWrapper>
-      <ProgressBar></ProgressBar>
       <Question Questions={MbtiQuestions[presentQuestion]}></Question>
       <Answers
-        currentColor={changeColor}
-        onLink={link}
-        onClick={handleClick}
+        pointerEvents={pointerEvents}
+        currentColor={currentColor}
+        onClick={onClickAnswer}
         Questions={MbtiQuestions[presentQuestion].options[0].ans}
       ></Answers>
       <Answers
-        currentColor={changeColor}
-        onLink={link}
-        onClick={handleClick}
+        pointerEvents={pointerEvents}
+        currentColor={currentColor}
+        onClick={onClickAnswer}
         Questions={MbtiQuestions[presentQuestion].options[1].ans}
       ></Answers>
       {presentQuestion === MbtiQuestions.length - 1 ? (
         <Link
           style={{ pointerEvents: canClick }}
-          ref={link}
           className="link"
-          to="/mbti/result"
-          state={{ mbti: MBTI }}
-          onClick={handleNextPage}
+          to="/loading"
+          state={{ loadingText: "결과를 분석중입니다", preventPage: MBTI }}
         >
           <div style={{ backgroundColor: nextPage }} className="nextPage">
             결과보기
@@ -77,6 +72,14 @@ const MbtiSelect = (props) => {
       ) : (
         ""
       )}
+      <ProgressBar>
+        <BarText>{(presentQuestion + 1) * 10}%</BarText>
+        <Bar>
+          <ProgressedBar
+            presentWidth={((presentQuestion + 1) / MbtiQuestions.length) * 100}
+          />
+        </Bar>
+      </ProgressBar>
     </SelectWrapper>
   );
 };
@@ -84,13 +87,12 @@ const MbtiSelect = (props) => {
 export default MbtiSelect;
 
 const SelectWrapper = styled.div`
-  .title {
-    font-size: 30px;
-  }
+  padding-top: 20px;
+  box-sizing: content-box;
+  min-height: 100vh;
   width: 500px;
   background-color: black;
   color: ${({ theme }) => theme.colors.WHITE};
-  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -113,4 +115,39 @@ const SelectWrapper = styled.div`
   }
 `;
 
-const ProgressBar = styled.div``;
+const ProgressBar = styled.div`
+  width: 90%;
+  position: relative;
+  margin-top: 20px;
+`;
+
+const BarText = styled.div`
+  top: -3px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  position: absolute;
+  font-size: 12px;
+  text-align: center;
+  background-color: black;
+  color: ${({ theme }) => theme.colors.MAIN_BG};
+  clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+  border: 1px solid gold;
+  box-sizing: content-box;
+  padding: 0px 15px;
+  z-index: 100;
+`;
+
+const Bar = styled.div`
+  width: 100%;
+  height: 7px;
+  border: 1px solid gold;
+  clip-path: polygon(5% 0%, 95% 0%, 100% 100%, 0% 100%);
+`;
+
+const ProgressedBar = styled.div`
+  width: ${({ presentWidth }) => `${presentWidth}%`};
+  height: 100%;
+  background-color: ${({ theme }) => theme.colors.MAIN_BG};
+  transition: 1s;
+  clip-path: polygon(5% 0%, 95% 0%, 100% 100%, 0% 100%);
+`;

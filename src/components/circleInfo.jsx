@@ -1,14 +1,13 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 
-const CircleInfo = (props) => {
+const CircleInfo = ({ imageURL }) => {
   return (
     <InfoWrapper>
-      <div className="info">
-        adad
-        <img src={props.imageURL} alt="" />
-      </div>
-      <div className="border"></div>
+      <Info>
+        <img src={imageURL} alt="" />
+      </Info>
+      <Border></Border>
     </InfoWrapper>
   );
 };
@@ -34,15 +33,29 @@ const InfoWrapper = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-  .info {
-    position: relative;
-    width: 90%;
-    height: 90%;
-    border-radius: 50%;
-    border: 3px solid rgb(193, 143, 41);
-    background-color: white;
-  }
+`;
 
+const Border = styled.div`
+  width: 220px;
+  height: 220px;
+  content: "";
+  z-index: 100;
+  position: absolute;
+  border: 3px dotted white;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: ${rotate} 120s linear infinite;
+`;
+
+const Info = styled.div`
+  position: relative;
+  width: 90%;
+  height: 90%;
+  border-radius: 50%;
+  border: 3px solid rgb(193, 143, 41);
+  background-color: white;
   img {
     position: absolute;
     top: 0;
@@ -50,18 +63,5 @@ const InfoWrapper = styled.div`
     width: 100%;
     height: 100%;
     border-radius: 50%;
-  }
-  .border {
-    width: 220px;
-    height: 220px;
-    content: "";
-    z-index: 100;
-    position: absolute;
-    border: 3px dotted white;
-    border-radius: 50%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    animation: ${rotate} 120s linear infinite;
   }
 `;

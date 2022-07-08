@@ -6,7 +6,7 @@ const HomeButton = (props) => {
   return (
     <Link to={"/"}>
       <ButtonWrapper>
-        <button>다시 테스트 하기</button>
+        <Button>다시 테스트 하기</Button>
       </ButtonWrapper>
     </Link>
   );
@@ -22,14 +22,15 @@ const ButtonWrapper = styled.div`
   display: flex;
   height: 56px;
   align-items: center;
-  button {
-    background-color: #0bc6e3;
-    height: 100%;
-    width: 100%;
-    cursor: pointer;
-    margin: auto;
-    color: ${({ theme }) => theme.colors.WHITE};
-    font-size: 18px;
-    font-weight: bold;
-  }
+`;
+
+const Button = styled.button`
+  background-color: #0bc6e3;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  margin: auto;
+  color: ${({ theme }) => theme.colors.WHITE};
+  font-size: 18px;
+  font-weight: bold;
 `;
