@@ -44,9 +44,14 @@ export default MainPage;
 
 const PageWrapper = styled.div`
   max-width: 500px;
+  display: flex;
+  flex-direction: column;
   background-color: black;
   min-height: 100vh;
   color: ${({ theme }) => theme.colors.WHITE};
+  @media screen and (max-width: 400px) {
+    width: 100%;
+  }
 `;
 
 const Header = styled.div`
@@ -56,6 +61,9 @@ const Header = styled.div`
   text-align: center;
   padding: 8px;
   border-bottom: 1px solid white;
+  @media screen and (max-width: 400px) {
+    height: 15%;
+  }
 `;
 const HeaderTitle = styled.div`
   font-size: 40px;
@@ -69,16 +77,23 @@ const HeaderText = styled.div`
 const Main = styled.div`
   display: flex;
   height: 70%;
+  @media screen and (max-width: 400px) {
+    flex-direction: column;
+  }
 `;
 const Mbti = styled.div`
   width: 50%;
-
   display: flex;
   flex-direction: column;
   border-right: 1px solid white;
   text-align: center;
   padding: 8px;
   align-items: center;
+  @media screen and (max-width: 400px) {
+    width: 100%;
+    border-bottom: 1px solid white;
+    border-right: none;
+  }
 `;
 const MbtiText = styled.div`
   font-size: 18px;
@@ -97,6 +112,9 @@ const Quiz = styled.div`
   text-align: center;
   padding: 8px;
   align-items: center;
+  @media screen and (max-width: 400px) {
+    width: 100%;
+  }
 `;
 
 const QuizText = styled.div`

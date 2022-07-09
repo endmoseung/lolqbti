@@ -96,6 +96,9 @@ const SelectWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media screen and (max-width: 400px) {
+    width: 100%;
+  }
 
   .link {
     width: 100%;

@@ -38,5 +38,9 @@ const Answer = styled.div`
 
   &:hover {
     background-color: #5555e9;
+    transform: scale(1.02);
+  }
+  &:active {
+    transform: scale(0.95);
   }
 `;

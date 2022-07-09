@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
@@ -8,11 +8,16 @@ const Loading = (props) => {
   const preventValue = location.state.preventPage;
   const navigator = useNavigate();
 
-  setTimeout(() => {
-    navigator(isNaN(preventValue) === true ? "/mbti/result" : "/quiz/result", {
-      state: preventValue,
-    });
-  }, 3000);
+  useEffect(() => {
+    setTimeout(() => {
+      navigator(
+        isNaN(preventValue) === true ? "/mbti/result" : "/quiz/result",
+        {
+          state: preventValue,
+        }
+      );
+    }, 3000);
+  }, [navigator, preventValue]);
 
   return (
     <LoadingWrapper>

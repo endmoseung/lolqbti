@@ -22,13 +22,12 @@ const Wrapper = styled.div`
 `;
 
 const MainQuestion = styled.div`
-  font-size: 20px;
+  font-size: 18px;
   box-sizing: content-box;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px;
-  height: 70px;
+  padding: 15px;
   max-width: 80%;
   margin: auto;
   background-color: ${({ theme }) => theme.colors.MAIN_BG};
@@ -47,6 +46,14 @@ const QuestionWrapper = styled.div`
     width: 400px;
     height: 300px;
   }
+  @media screen and (max-width: 400px) {
+    width: 300px;
+    height: 200px;
+    img {
+      width: 300px;
+      height: 200px;
+    }
+  }
 `;
 const OutBorder = styled.div`
   width: 420px;
@@ -55,4 +62,8 @@ const OutBorder = styled.div`
   height: 280px;
   top: 30px;
   left: -10px;
+  @media screen and (max-width: 400px) {
+    width: 320px;
+    height: 180px;
+  }
 `;

@@ -44,8 +44,20 @@ const QuizSelect = (props) => {
     setScore(score);
   };
 
+  const list = {
+    visible: { opacity: 1 },
+    hidden: { opacity: 0 },
+  };
+
+  useEffect(() => {}, []);
   return (
-    <Wrapper>
+    <Wrapper
+      as={motion.div}
+      initial="hidden"
+      animate="visible"
+      variants={list}
+      transition={{ ease: "easeOut", duration: 1 }}
+    >
       <Quiz>
         <div>LOL QUIZ</div>
       </Quiz>
@@ -90,10 +102,10 @@ const QuizSelect = (props) => {
           />
         </Bar>
       </ProgressBar>
+      <QuizInfo></QuizInfo>
     </Wrapper>
   );
 };
-
 export default QuizSelect;
 
 const Wrapper = styled.div`
@@ -122,7 +134,7 @@ const Wrapper = styled.div`
     font-size: 20px;
     font-weight: bold;
     margin: auto;
-    transition: 300ms all ease-out;
+    transition: 700ms all ease-out;
   }
 `;
 
@@ -158,13 +170,15 @@ const Bar = styled.div`
   width: 100%;
   height: 7px;
   border: 1px solid gold;
-  clip-path: polygon(5% 0%, 95% 0%, 100% 100%, 0% 100%);
+  clip-path: polygon(2% 0%, 98% 0%, 100% 100%, 0% 100%);
 `;
 
 const ProgressedBar = styled.div`
   width: ${({ presentWidth }) => `${presentWidth}%`};
   height: 100%;
   background-color: ${({ theme }) => theme.colors.MAIN_BG};
-  transition: 300ms;
-  clip-path: polygon(5% 0%, 95% 0%, 100% 100%, 0% 100%);
+  transition: 1s;
+  clip-path: polygon(2% 0%, 98% 0%, 100% 100%, 0% 100%);
 `;
+
+const QuizInfo = styled.div``;

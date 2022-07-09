@@ -16,12 +16,19 @@ export default HomeButton;
 const ButtonWrapper = styled.div`
   box-sizing: border-box;
   border: 1px solid white;
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
   width: 80%;
   padding: 3px;
   margin: auto;
   display: flex;
   height: 56px;
   align-items: center;
+  transition: 150ms all ease-in-out;
+  z-index: 9999;
+  &:hover {
+    border-radius: 0;
+  }
 `;
 
 const Button = styled.button`

@@ -21,6 +21,12 @@ const ButtonWrapper = styled.div`
   height: 56px;
   align-items: center;
   margin-top: 20px;
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  transition: 150ms all ease-in-out;
+  &:hover {
+    border-radius: 0;
+  }
 `;
 const Buttons = styled.button`
   background-color: ${({ backgroundColor }) => `${backgroundColor}`};

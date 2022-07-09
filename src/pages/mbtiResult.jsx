@@ -6,10 +6,13 @@ import Kakaotalk from "../components/kakaotalk";
 import { MbtiResults } from "../Constant/mbtiResult";
 import Capture from "../components/capture";
 import html2canvas from "html2canvas";
+import { useRef } from "react";
 
 const MbtiResult = (props) => {
   const { state } = useLocation();
   const sortMbti = state.split("").sort().join(""); //mbti 성향을 받아서 성향별로 sort
+
+  const resultWrapper = useRef();
 
   const capture = () => {
     html2canvas(document.body).then((canvas) => {
@@ -60,16 +63,19 @@ const MbtiResult = (props) => {
   const soluted = solution(sortMbti);
   const imageUrl =
     "/images/mbtichampion/" + MbtiResults[soluted].mbti + ".jpeg";
+  console.log(MbtiResults[soluted].main);
   return (
-    <ResultWrapper>
-      <Summoner>소환사님의 mbti는?</Summoner>
+    <ResultWrapper ref={resultWrapper}>
+      <Summoner>
+        소환사님의 mbti는? <br />
+      </Summoner>
       <MbtiText>{MbtiResults[soluted].mbti}</MbtiText>
       <MbtiChampion>
         <img src={imageUrl} alt="" />
         <ChampionName>{MbtiResults[soluted].championName}</ChampionName>
       </MbtiChampion>
       <MbtiTitle>{MbtiResults[soluted].title}</MbtiTitle>
-      <MbtiMain>{MbtiResults[soluted].main} </MbtiMain>
+      <MbtiMain>{MbtiResults[soluted].main}</MbtiMain>
       <HomeButton></HomeButton>
       <Kakaotalk></Kakaotalk>
       <Facebook></Facebook>
@@ -126,6 +132,9 @@ const MbtiTitle = styled.div`
 `;
 
 const MbtiMain = styled.div`
+  white-space: pre-line;
+  text-align: start;
   font-size: 16px;
   margin-bottom: 20px;
+  line-height: 140%;
 `;

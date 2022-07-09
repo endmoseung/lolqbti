@@ -14,6 +14,8 @@ export default Button;
 const ButtonWrapper = styled.div`
   box-sizing: border-box;
   border: 1px solid white;
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
   width: 150px;
   padding: 3px;
   margin: auto;
@@ -21,6 +23,10 @@ const ButtonWrapper = styled.div`
   height: 56px;
   align-items: center;
   position: relative;
+  transition: all 150ms ease-out;
+  &:hover {
+    border-radius: 0;
+  }
 `;
 const Buttons = styled.button`
   background-color: ${({ theme }) => theme.colors.MAIN_BG};
@@ -30,7 +36,4 @@ const Buttons = styled.button`
   cursor: pointer;
   margin: auto;
   border: none;
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.WHITE};
-  }
 `;
