@@ -1,17 +1,26 @@
+import { useState } from "react";
 import styled from "styled-components";
-// import theme from "../theme/theme";
+import theme from "../theme/theme";
 
-const Answers = ({ onClick, pointerEvents, Questions }) => {
+const Answers = ({
+  onClick,
+  pointerEvents,
+  Questions,
+  presentQuestion,
+  mainLength,
+}) => {
+  const [backgroundColor, setBackgroundColor] = useState(theme.colors.MAIN_BG);
+  const [count, setCount] = useState(0);
   const handleClick = (e) => {
     onClick(e);
+    setCount(count + 1);
+    if (presentQuestion === mainLength - 1) {
+      setBackgroundColor("blue");
+    }
   };
-  // let backgroundColor = theme.colors.MAIN_BG;
   return (
     <AnswerWrapper style={{ pointerEvents: pointerEvents }}>
-      <Answer
-        // style={{ backgroundColor: backgroundColor }}
-        onClick={handleClick}
-      >
+      <Answer backgroundColor={backgroundColor} onClick={handleClick}>
         {Questions}
       </Answer>
     </AnswerWrapper>
@@ -24,12 +33,13 @@ const AnswerWrapper = styled.div`
   width: 100%;
 `;
 const Answer = styled.div`
-  background-color: ${({ theme }) => theme.colors.MAIN_BG};
+  background-color: ${({ backgroundColor }) => backgroundColor};
+  border-radius: 4px;
   cursor: pointer;
   color: ${({ theme }) => theme.colors.WHITE};
   width: 80%;
   text-align: center;
-  font-size: 16px;
+  font-size: ${({ theme }) => theme.fontSize.DEFAULT};
   margin: auto;
   margin-top: 20px;
   box-sizing: content-box;

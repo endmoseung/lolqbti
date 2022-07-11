@@ -41,6 +41,10 @@ const LoadingWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-height: 100%;
+  @media screen and (max-width: 400px) {
+    font-size: ${({ theme }) => theme.fontSize.BIG};
+  }
 `;
 const LoadingText = styled.div`
   color: ${({ theme }) => theme.colors.WHITE};
@@ -54,6 +58,10 @@ const ImageWrapper = styled.div`
 const Image = styled.img`
   width: 400px;
   height: 300px;
+  @media screen and (max-width: 400px) {
+    width: 300px;
+    height: 200px;
+  }
 `;
 
 const ImageBorder = styled.div`
@@ -63,4 +71,8 @@ const ImageBorder = styled.div`
   width: 380px;
   height: 320px;
   border: solid white 2px;
+  @media screen and (max-width: 400px) {
+    width: 280px;
+    height: 220px;
+  }
 `;

@@ -16,5 +16,5 @@ const Wrapper = styled.div`
 `;
 const MainQuestion = styled.div`
   color: ${({ theme }) => theme.colors.WHITE};
-  font-size: 25px;
+  font-size: ${({ theme }) => theme.fontSize.BIG};
 `;

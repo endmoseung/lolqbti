@@ -22,7 +22,8 @@ const Wrapper = styled.div`
 `;
 
 const MainQuestion = styled.div`
-  font-size: 18px;
+  border-radius: 4px;
+  font-size: ${({ theme }) => theme.fontSize.SMALL};
   box-sizing: content-box;
   display: flex;
   align-items: center;
@@ -40,7 +41,7 @@ const QuestionWrapper = styled.div`
   position: relative;
   padding: 20px;
   padding-left: 0;
-  font-size: 25px;
+  font-size: ${({ theme }) => theme.fontSize.BIG};
   margin: auto;
   img {
     width: 400px;

@@ -9,9 +9,6 @@ let answer = "";
 const MbtiSelect = (props) => {
   const [presentQuestion, setQuestion] = useState(0);
 
-  const [currentColor, setCurrentColor] = useState(
-    `${({ theme }) => theme.colors.MAIN_BG}`
-  );
   useEffect(() => {
     answer = "";
   }, []); // 첫페이지로 이동했을때 다시 테스트보면 answer가 중첩되므로 mount됬을때 answer를 초기화해준다.
@@ -25,14 +22,13 @@ const MbtiSelect = (props) => {
   const [pointerEvents, setPointerEvents] = useState("auto");
 
   const onClickAnswer = (event) => {
-    setCurrentColor("blue");
-    for (let i = 0; i < MbtiQuestions[0].options.length; i++) {
-      if (
-        MbtiQuestions[presentQuestion].options[i].ans === event.target.innerText
-      ) {
-        answer += MbtiQuestions[presentQuestion].options[i].type.value;
+    MbtiQuestions[presentQuestion].options.filter((item) => {
+      if (item.ans === event.target.innerText) {
+        answer += item.value;
       }
-    }
+      return answer;
+    });
+
     if (presentQuestion < MbtiQuestions.length - 1) {
       setQuestion(presentQuestion + 1);
     }
@@ -46,18 +42,16 @@ const MbtiSelect = (props) => {
   return (
     <SelectWrapper>
       <Question Questions={MbtiQuestions[presentQuestion]}></Question>
-      <Answers
-        pointerEvents={pointerEvents}
-        currentColor={currentColor}
-        onClick={onClickAnswer}
-        Questions={MbtiQuestions[presentQuestion].options[0].ans}
-      ></Answers>
-      <Answers
-        pointerEvents={pointerEvents}
-        currentColor={currentColor}
-        onClick={onClickAnswer}
-        Questions={MbtiQuestions[presentQuestion].options[1].ans}
-      ></Answers>
+      {MbtiQuestions[presentQuestion].options.map((item) => (
+        <Answers
+          key={Math.random()}
+          pointerEvents={pointerEvents}
+          presentQuestion={presentQuestion}
+          mainLength={MbtiQuestions.length}
+          onClick={onClickAnswer}
+          Questions={item.ans}
+        ></Answers>
+      ))}
       {presentQuestion === MbtiQuestions.length - 1 ? (
         <Link
           style={{ pointerEvents: canClick }}
@@ -110,11 +104,12 @@ const SelectWrapper = styled.div`
     width: 80%;
     box-sizing: content-box;
     padding: 10px;
-    font-size: 20px;
+    font-size: ${({ theme }) => theme.fontSize.MIDDLE};
     font-weight: bold;
     color: black;
     margin: auto;
     transition: 300ms all ease-out;
+    border-radius: 4px;
   }
 `;
 
@@ -129,7 +124,7 @@ const BarText = styled.div`
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
   position: absolute;
-  font-size: 12px;
+  font-size: ${({ theme }) => theme.fontSize.PROGRESSBAR};
   text-align: center;
   background-color: black;
   color: ${({ theme }) => theme.colors.MAIN_BG};

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Button from "../components/button";
 import { Link } from "react-router-dom";
 import CircleInfo from "../components/circleInfo";
+import theme from "../theme/theme";
 
 const MainPage = (props) => {
   return (
@@ -49,7 +50,7 @@ const PageWrapper = styled.div`
   background-color: black;
   min-height: 100vh;
   color: ${({ theme }) => theme.colors.WHITE};
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: ${theme.mediaScreen.PHONE}) {
     width: 100%;
   }
 `;
@@ -61,24 +62,25 @@ const Header = styled.div`
   text-align: center;
   padding: 8px;
   border-bottom: 1px solid white;
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: ${theme.mediaScreen.PHONE}) {
     height: 15%;
   }
 `;
 const HeaderTitle = styled.div`
-  font-size: 40px;
+  font-size: ${({ theme }) => theme.fontSize.MAINTEXT};
   font-weight: bold;
   margin-bottom: 20px;
 `;
 const HeaderText = styled.div`
-  font-size: 20px;
+  font-size: ${({ theme }) => theme.fontSize.MIDDLE};
   line-height: 30px;
 `;
 const Main = styled.div`
   display: flex;
   height: 70%;
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: ${theme.mediaScreen.PHONE}) {
     flex-direction: column;
+    height: 100%;
   }
 `;
 const Mbti = styled.div`
@@ -89,19 +91,19 @@ const Mbti = styled.div`
   text-align: center;
   padding: 8px;
   align-items: center;
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: ${theme.mediaScreen.PHONE}) {
     width: 100%;
     border-bottom: 1px solid white;
     border-right: none;
   }
 `;
 const MbtiText = styled.div`
-  font-size: 18px;
+  font-size: ${({ theme }) => theme.fontSize.SMALL};
   line-height: 30px;
   margin: 40px 0;
 `;
 const MbtiTitle = styled.div`
-  font-size: 25px;
+  font-size: ${({ theme }) => theme.fontSize.BIG};
   font-family: "FrizQuadrataBold";
   margin-bottom: 10px;
 `;
@@ -112,18 +114,18 @@ const Quiz = styled.div`
   text-align: center;
   padding: 8px;
   align-items: center;
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: ${theme.mediaScreen.PHONE}) {
     width: 100%;
   }
 `;
 
 const QuizText = styled.div`
-  font-size: 18px;
+  font-size: ${({ theme }) => theme.fontSize.SMALL};
   line-height: 30px;
   margin: 40px 0;
 `;
 const QuizTitle = styled.div`
-  font-size: 25px;
+  font-size: ${({ theme }) => theme.fontSize.BIG};
   font-family: "FrizQuadrataBold";
   margin-bottom: 10px;
 `;

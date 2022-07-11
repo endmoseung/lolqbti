@@ -28,7 +28,6 @@ const MbtiResult = (props) => {
     //sortMbti를 문자갯수로 재정의 한다음 2개이상인값만 뽑아서 Mbti를 추출하는 함수
     let answer = "";
     let sorted = "";
-    let final;
     let cnt = 1;
     for (let i = 0; i < sortMbti.length; i++) {
       if (i === sortMbti.indexOf(sortMbti[i])) {
@@ -48,34 +47,29 @@ const MbtiResult = (props) => {
         sorted += answer[i];
       }
     }
-    for (let i = 0; i < MbtiResults.length; i++) {
-      if (
-        MbtiResults[i].mbti.split("").sort().join("") ===
-        sorted.split("").sort().join("")
-      ) {
-        final = i;
-        break;
-      }
-    }
-    console.log(answer, sorted, final);
-    return final;
+    const mbtiResult = MbtiResults.filter(
+      (r) =>
+        r.mbti.split("").sort().join("") === sorted.split("").sort().join("")
+    );
+    return mbtiResult;
   };
-  const soluted = solution(sortMbti);
-  const imageUrl =
-    "/images/mbtichampion/" + MbtiResults[soluted].mbti + ".jpeg";
-  console.log(MbtiResults[soluted].main);
+
+  const soluted = solution(sortMbti)[0];
+  const imageUrl = "/images/mbtichampion/" + soluted.mbti + ".jpeg";
   return (
     <ResultWrapper ref={resultWrapper}>
       <Summoner>
         소환사님의 mbti는? <br />
       </Summoner>
-      <MbtiText>{MbtiResults[soluted].mbti}</MbtiText>
-      <MbtiChampion>
-        <img src={imageUrl} alt="" />
-        <ChampionName>{MbtiResults[soluted].championName}</ChampionName>
-      </MbtiChampion>
-      <MbtiTitle>{MbtiResults[soluted].title}</MbtiTitle>
-      <MbtiMain>{MbtiResults[soluted].main}</MbtiMain>
+      <MbtiResultsContainer>
+        <MbtiText>{soluted.mbti}</MbtiText>
+        <MbtiChampion>
+          <img src={imageUrl} alt="" />
+          <ChampionName>{soluted.championName}</ChampionName>
+        </MbtiChampion>
+        <MbtiTitle>{soluted.title}</MbtiTitle>
+        <MbtiMain>{soluted.main}</MbtiMain>
+      </MbtiResultsContainer>
       <HomeButton></HomeButton>
       <Kakaotalk></Kakaotalk>
       <Facebook></Facebook>
@@ -100,18 +94,19 @@ const ResultWrapper = styled.div`
 `;
 
 const Summoner = styled.div`
-  font-size: 25px;
+  font-size: ${({ theme }) => theme.fontSize.BIG};
   margin-bottom: 10px;
 `;
 
+const MbtiResultsContainer = styled.div``;
 const MbtiText = styled.div`
   color: ${({ theme }) => theme.colors.WHITE};
-  font-size: 40px;
+  font-size: ${({ theme }) => theme.fontSize.MAINTEXT};
   font-weight: bold;
 `;
 
 const MbtiChampion = styled.div`
-  font-size: 20px;
+  font-size: ${({ theme }) => theme.fontSize.MIDDLE};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -127,14 +122,14 @@ const ChampionName = styled.div`
 `;
 
 const MbtiTitle = styled.div`
-  font-size: 25px;
+  font-size: ${({ theme }) => theme.fontSize.BIG};
   margin-bottom: 10px;
 `;
 
 const MbtiMain = styled.div`
   white-space: pre-line;
   text-align: start;
-  font-size: 16px;
+  font-size: ${({ theme }) => theme.fontSize.DEFAULT};
   margin-bottom: 20px;
   line-height: 140%;
 `;

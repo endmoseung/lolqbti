@@ -3,34 +3,40 @@ import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Capture from "../components/capture";
 import HomeButton from "../components/homeButton";
-import { QuizResults } from "../Constant/QuizResult";
 import html2canvas from "html2canvas";
 import Kakaotalk from "../components/kakaotalk";
 import Facebook from "../components/facebook";
 
 const QuizResult = (props) => {
   const { state } = useLocation();
-  let tierIndex;
+  let rank;
+  let percent;
   const scoreAnalyst = () => {
     if (state < 7) {
-      tierIndex = 0;
+      rank = "Bronze";
+      percent = 100;
     } else if (state < 14) {
-      tierIndex = 1;
+      rank = "Silver";
+      percent = 80;
     } else if (state < 21) {
-      tierIndex = 2;
+      rank = "Gold";
+      percent = 50;
     } else if (state < 28) {
-      tierIndex = 3;
+      rank = "Platinum";
+      percent = 20;
     } else if (state < 33) {
-      tierIndex = 4;
+      rank = "Diamond";
+      percent = 3;
     } else if (state < 41) {
-      tierIndex = 5;
+      rank = "Master";
+      percent = 1;
     } else {
-      tierIndex = 6;
+      rank = "Challenger";
+      percent = 0.3;
     }
   };
   scoreAnalyst();
-  const tier = "/images/tier/" + QuizResults[tierIndex].tier + ".jpeg";
-  const rank = 0.7;
+  const tier = "/images/tier/" + rank + ".jpeg";
 
   const capture = () => {
     html2canvas(document.body).then((canvas) => {
@@ -42,14 +48,13 @@ const QuizResult = (props) => {
     });
   };
 
-  console.log(state);
   return (
     <QuizWrapper>
       <QuizTitle>소환사님의 뇌지컬 티어는?</QuizTitle>
       <img src={tier} alt="" />
-      <TierText>{QuizResults[tierIndex].tier}</TierText>
+      <TierText>{rank}</TierText>
       <Info>
-        당신은 상위 <span className="rank">{rank}</span>%의 뇌지컬을
+        당신은 상위 <span className="rank">{percent}</span>%의 뇌지컬을
         소유중입니다.
       </Info>
       <HomeButton></HomeButton>
@@ -66,7 +71,7 @@ const QuizWrapper = styled.div`
   width: 500px;
   text-align: center;
   padding: 20px;
-  font-size: 25px;
+  font-size: ${({ theme }) => theme.fontSize.BIG};
   color: white;
   img {
     margin-top: 20px;
@@ -74,7 +79,7 @@ const QuizWrapper = styled.div`
     height: 250px;
   }
   .rank {
-    font-size: 30px;
+    font-size: ${({ theme }) => theme.fontSize.VERYBIG};
   }
 `;
 

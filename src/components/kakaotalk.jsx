@@ -25,9 +25,8 @@ const Kakaotalk = () => {
       objectType: "feed",
       content: {
         title: "LOLQbti",
-        description: "#mbti #리그오브레전드 #퀴즈 #뇌지컬 #롤 #티어",
-        imageUrl:
-          "http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png",
+        description: "#mbti #리그오브레전드 #퀴즈 #뇌지컬 #롤",
+        imageUrl: "https://ifh.cc/g/WF4QX8.jpg",
         link: {
           mobileWebUrl: url,
           webUrl: url,
@@ -41,13 +40,6 @@ const Kakaotalk = () => {
       buttons: [
         {
           title: "웹으로 보기",
-          link: {
-            mobileWebUrl: url,
-            webUrl: url,
-          },
-        },
-        {
-          title: "앱으로 보기",
           link: {
             mobileWebUrl: url,
             webUrl: url,

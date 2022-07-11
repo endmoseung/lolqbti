@@ -4,7 +4,7 @@ import Answers from "../components/answers";
 import QuizQuestion from "../components/quizQuestion";
 import { QuizQuestions } from "../Constant/QuizQuestions";
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 
 let score = 0;
 
@@ -25,14 +25,13 @@ const QuizSelect = (props) => {
   const [Score, setScore] = useState("");
 
   const handleAnswer = (event) => {
-    for (let i = 0; i < QuizQuestions[0].options.length; i++) {
-      if (
-        QuizQuestions[presentQuestion].options[i].ans === event.target.innerText
-      ) {
-        score += QuizQuestions[presentQuestion].options[i].score;
-        console.log(score);
+    QuizQuestions[presentQuestion].options.filter((item) => {
+      if (item.ans === event.target.innerText) {
+        score += item.score;
       }
-    }
+      return score;
+    });
+
     if (presentQuestion < QuizQuestions.length - 1) {
       setQuestion(presentQuestion + 1);
     }
@@ -44,39 +43,33 @@ const QuizSelect = (props) => {
     setScore(score);
   };
 
-  const list = {
-    visible: { opacity: 1 },
-    hidden: { opacity: 0 },
-  };
+  // const list = {
+  //   visible: { opacity: 1 },
+  //   hidden: { opacity: 0 },
+  // };
 
-  useEffect(() => {}, []);
   return (
     <Wrapper
-      as={motion.div}
-      initial="hidden"
-      animate="visible"
-      variants={list}
-      transition={{ ease: "easeOut", duration: 1 }}
+    // as={motion.div}
+    // initial="hidden"
+    // animate="visible"
+    // variants={list}
+    // transition={{ ease: "easeOut", duration: 1 }}
     >
       <Quiz>
         <div>LOL QUIZ</div>
       </Quiz>
       <QuizQuestion Questions={QuizQuestions[presentQuestion].q}></QuizQuestion>
-      <Answers
-        Questions={QuizQuestions[presentQuestion].options[0].ans}
-        onClick={handleAnswer}
-        pointerEvents={pointerEvents}
-      ></Answers>
-      <Answers
-        Questions={QuizQuestions[presentQuestion].options[1].ans}
-        onClick={handleAnswer}
-        pointerEvents={pointerEvents}
-      ></Answers>
-      <Answers
-        Questions={QuizQuestions[presentQuestion].options[2].ans}
-        onClick={handleAnswer}
-        pointerEvents={pointerEvents}
-      ></Answers>
+      {QuizQuestions[presentQuestion].options.map((item) => (
+        <Answers
+          key={Math.random()}
+          pointerEvents={pointerEvents}
+          presentQuestion={presentQuestion}
+          mainLength={QuizQuestions.length}
+          onClick={handleAnswer}
+          Questions={item.ans}
+        ></Answers>
+      ))}
       {presentQuestion === QuizQuestions.length - 1 ? (
         <Link
           style={{ pointerEvents: canClick }}
@@ -131,7 +124,7 @@ const Wrapper = styled.div`
     box-sizing: content-box;
     padding: 10px;
     color: black;
-    font-size: 20px;
+    font-size: ${({ theme }) => theme.fontSize.MIDDLE};
     font-weight: bold;
     margin: auto;
     transition: 700ms all ease-out;
@@ -155,7 +148,7 @@ const BarText = styled.div`
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
   position: absolute;
-  font-size: 12px;
+  font-size: ${({ theme }) => theme.fontSize.PROGRESSBAR};
   text-align: center;
   background-color: black;
   color: ${({ theme }) => theme.colors.MAIN_BG};

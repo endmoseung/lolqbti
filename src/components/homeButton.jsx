@@ -25,7 +25,6 @@ const ButtonWrapper = styled.div`
   height: 56px;
   align-items: center;
   transition: 150ms all ease-in-out;
-  z-index: 9999;
   &:hover {
     border-radius: 0;
   }
@@ -38,6 +37,6 @@ const Button = styled.button`
   cursor: pointer;
   margin: auto;
   color: ${({ theme }) => theme.colors.WHITE};
-  font-size: 18px;
+  font-size: ${({ theme }) => theme.fontSize.SMALL};
   font-weight: bold;
 `;

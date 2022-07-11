@@ -34,7 +34,7 @@ const Buttons = styled.button`
   height: 100%;
   width: 100%;
   padding: 8px;
-  font-size: 18px;
+  font-size: ${({ theme }) => theme.fontSize.SMALL};
   font-weight: bold;
   cursor: pointer;
   margin: auto;
