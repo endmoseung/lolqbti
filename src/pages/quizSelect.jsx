@@ -112,6 +112,7 @@ const Wrapper = styled.div`
   padding: 20px;
   justify-content: center;
   position: relative;
+  white-space: pre-line;
 
   .link {
     width: 100%;

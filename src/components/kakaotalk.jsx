@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import styled from "styled-components";
 import ShareButton from "./shareButton";
 
-const Kakaotalk = () => {
+const Kakaotalk = ({ title, main, buttonTitle, type }) => {
   const url = "https://www.youtube.com"; //현재 url가져오기
   useEffect(() => {
     initKakao(); //
@@ -17,6 +17,10 @@ const Kakaotalk = () => {
       }
     }
   };
+  const imageUrl =
+    type === "mbti?"
+      ? "https://ifh.cc/g/WF4QX8.jpg"
+      : "https://ifh.cc/g/pM57f3.png";
 
   //버튼을 누르면 실행되는 함수
   const shareKakao = () => {
@@ -24,22 +28,17 @@ const Kakaotalk = () => {
     window.Kakao.Link.sendDefault({
       objectType: "feed",
       content: {
-        title: "LOLQbti",
-        description: "#mbti #리그오브레전드 #퀴즈 #뇌지컬 #롤",
-        imageUrl: "https://ifh.cc/g/WF4QX8.jpg",
+        title: title,
+        description: main,
+        imageUrl: imageUrl,
         link: {
           mobileWebUrl: url,
           webUrl: url,
         },
       },
-      social: {
-        likeCount: 286,
-        commentCount: 45,
-        sharedCount: 845,
-      },
       buttons: [
         {
-          title: "웹으로 보기",
+          title: buttonTitle,
           link: {
             mobileWebUrl: url,
             webUrl: url,

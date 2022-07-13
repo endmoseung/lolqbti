@@ -6,13 +6,10 @@ import Kakaotalk from "../components/kakaotalk";
 import { MbtiResults } from "../Constant/mbtiResult";
 import Capture from "../components/capture";
 import html2canvas from "html2canvas";
-import { useRef } from "react";
 
 const MbtiResult = (props) => {
   const { state } = useLocation();
   const sortMbti = state.split("").sort().join(""); //mbti 성향을 받아서 성향별로 sort
-
-  const resultWrapper = useRef();
 
   const capture = () => {
     html2canvas(document.body).then((canvas) => {
@@ -57,21 +54,28 @@ const MbtiResult = (props) => {
   const soluted = solution(sortMbti)[0];
   const imageUrl = "/images/mbtichampion/" + soluted.mbti + ".jpeg";
   return (
-    <ResultWrapper ref={resultWrapper}>
-      <Summoner>
-        소환사님의 mbti는? <br />
-      </Summoner>
-      <MbtiResultsContainer>
-        <MbtiText>{soluted.mbti}</MbtiText>
-        <MbtiChampion>
-          <img src={imageUrl} alt="" />
-          <ChampionName>{soluted.championName}</ChampionName>
-        </MbtiChampion>
-        <MbtiTitle>{soluted.title}</MbtiTitle>
-        <MbtiMain>{soluted.main}</MbtiMain>
-      </MbtiResultsContainer>
+    <ResultWrapper>
+      <CapturePortion>
+        <Summoner>
+          소환사님의 mbti는? <br />
+        </Summoner>
+        <MbtiResultsContainer>
+          <MbtiText>{soluted.mbti}</MbtiText>
+          <MbtiChampion>
+            <img src={imageUrl} alt="" />
+            <ChampionName>{soluted.championName}</ChampionName>
+          </MbtiChampion>
+          <MbtiTitle>{soluted.title}</MbtiTitle>
+          <MbtiMain>{soluted.main}</MbtiMain>
+        </MbtiResultsContainer>
+      </CapturePortion>
       <HomeButton></HomeButton>
-      <Kakaotalk></Kakaotalk>
+      <Kakaotalk
+        type={"mbti"}
+        buttonTitle={"MBTI 검사하러가기"}
+        title={soluted.title}
+        main={soluted.main}
+      ></Kakaotalk>
       <Facebook></Facebook>
       <Capture fileName={"LOLMBTI"} onClick={capture}></Capture>
     </ResultWrapper>
@@ -92,6 +96,7 @@ const ResultWrapper = styled.div`
     height: 250px;
   }
 `;
+const CapturePortion = styled.div``;
 
 const Summoner = styled.div`
   font-size: ${({ theme }) => theme.fontSize.BIG};

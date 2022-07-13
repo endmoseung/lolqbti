@@ -10,19 +10,18 @@ const Answers = ({
   mainLength,
 }) => {
   const [backgroundColor, setBackgroundColor] = useState(theme.colors.MAIN_BG);
-  const [count, setCount] = useState(0);
   const handleClick = (e) => {
     onClick(e);
-    setCount(count + 1);
     if (presentQuestion === mainLength - 1) {
       setBackgroundColor("blue");
     }
   };
   return (
-    <AnswerWrapper style={{ pointerEvents: pointerEvents }}>
-      <Answer backgroundColor={backgroundColor} onClick={handleClick}>
-        {Questions}
-      </Answer>
+    <AnswerWrapper
+      onClick={handleClick}
+      style={{ pointerEvents: pointerEvents }}
+    >
+      <Answer backgroundColor={backgroundColor}>{Questions}</Answer>
     </AnswerWrapper>
   );
 };
@@ -45,7 +44,7 @@ const Answer = styled.div`
   box-sizing: content-box;
   padding: 20px;
   transition: all 300ms ease-in-out;
-
+  border: 1px solid white;
   &:hover {
     background-color: #5555e9;
     transform: scale(1.02);

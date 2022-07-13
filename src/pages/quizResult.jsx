@@ -14,16 +14,16 @@ const QuizResult = (props) => {
   const scoreAnalyst = () => {
     if (state < 7) {
       rank = "Bronze";
-      percent = 100;
+      percent = 90;
     } else if (state < 14) {
       rank = "Silver";
-      percent = 80;
+      percent = 50;
     } else if (state < 21) {
       rank = "Gold";
-      percent = 50;
+      percent = 30;
     } else if (state < 28) {
       rank = "Platinum";
-      percent = 20;
+      percent = 21;
     } else if (state < 33) {
       rank = "Diamond";
       percent = 3;
@@ -58,7 +58,12 @@ const QuizResult = (props) => {
         소유중입니다.
       </Info>
       <HomeButton></HomeButton>
-      <Kakaotalk></Kakaotalk>
+      <Kakaotalk
+        type={"quiz"}
+        buttonTitle={"뇌지컬 Quiz 풀어보기"}
+        title={"소환사님의 뇌지컬 티어는?"}
+        main={rank}
+      ></Kakaotalk>
       <Facebook></Facebook>
       <Capture onClick={capture}></Capture>
     </QuizWrapper>
