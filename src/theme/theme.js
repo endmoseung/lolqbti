@@ -7,6 +7,7 @@ const mediaScreen = {
   PHONE: "500px",
 };
 const fontSize = {
+  MAINTEXT :"40px",
   VERYBIG: "30px",
   BIG: "25px",
   MIDDLE: "20px",

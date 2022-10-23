@@ -7,7 +7,7 @@ import html2canvas from "html2canvas";
 import Kakaotalk from "../components/kakaotalk";
 import Facebook from "../components/facebook";
 
-const QuizResult = (props) => {
+const QuizResult = () => {
   const { state } = useLocation();
   let rank;
   let percent;

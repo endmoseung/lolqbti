@@ -7,6 +7,7 @@ const Kakaotalk = ({ title, main, buttonTitle, type }) => {
   useEffect(() => {
     initKakao(); //
   }, []);
+  console.log();
 
   //자바스크립트키로 카카오 init
   const initKakao = () => {
